@@ -204,6 +204,8 @@ public class TextTool: NSObject, DrawingTool {
     context.toolSettings.selectedShape = nil
     context.toolSettings.interactiveView = nil
     context.toolSettings.isPersistentBufferDirty = true
+      context.toolSettings.selectedShape = nil
+
   }
 
   private func applyEditTextOperationIfTextHasChanged(context: ToolOperationContext) {
