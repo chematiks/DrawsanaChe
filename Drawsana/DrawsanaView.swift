@@ -54,7 +54,10 @@ public class DrawsanaView: UIView {
       tool?.deactivate(context: self.toolOperationContext)
       operationStack = DrawingOperationStack(drawing: drawing)
       drawing.delegate = self
-      drawing.size = bounds.size
+        let size = bounds.size
+        if size.width > 0.0 && size.height > 0.0 {
+            drawing.size = size
+        }
       tool?.activate(shapeUpdater: self, context: self.toolOperationContext, shape: nil)
       applyToolSettingsChanges()
       if let tool = tool {
