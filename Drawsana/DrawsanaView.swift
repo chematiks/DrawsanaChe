@@ -30,7 +30,9 @@ public class DrawsanaView: UIView {
   // MARK: Public API
 
   public weak var delegate: DrawsanaViewDelegate?
-
+    
+    var selectionSublayer: CAShapeLayer?
+    
   /// Currently active tool
   public private(set) var tool: DrawingTool?
 
@@ -196,12 +198,14 @@ public class DrawsanaView: UIView {
     selectionIndicatorView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
     let selectionLayer = CAShapeLayer()
-    selectionLayer.strokeColor = UIColor.black.cgColor
-    selectionLayer.lineWidth = 2
+    selectionLayer.strokeColor = UIColor(hexString: "586468").cgColor
+      selectionLayer.lineWidth = 1.5
     selectionLayer.lineDashPattern = [4, 4]
     selectionLayer.fillColor = nil
     selectionLayer.frame = selectionIndicatorView.bounds
     selectionLayer.path = UIBezierPath(rect: selectionIndicatorView.bounds).cgPath
+      self.selectionSublayer = selectionLayer
+      
     selectionIndicatorView.layer.addSublayer(selectionLayer)
     selectionIndicatorView.layer.shadowColor = UIColor.white.cgColor
     selectionIndicatorView.layer.shadowOffset = .zero
@@ -386,6 +390,13 @@ public class DrawsanaView: UIView {
         CGPoint(x: selectionBounds.size.width / 2, y: selectionBounds.size.height / 2)),
       rotation: shape.transform.rotation,
       scale: shape.transform.scale).affineTransform
+            
+      
+      self.selectionSublayer?.lineWidth = 1.5 / shape.transform.scale
+      self.selectionSublayer?.lineDashPattern = [NSNumber(floatLiteral: 4.0 / shape.transform.scale),
+                                                 NSNumber(floatLiteral: 4.0 / shape.transform.scale)]
+      
+      
     selectionIndicatorView.isHidden = false
 
     selectionIndicatorViewShapeLayer.frame = selectionIndicatorView.bounds
