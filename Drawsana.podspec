@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = 'Drawsana'
-  spec.version      = '0.12.1'
+  spec.version      = '0.12.2'
   spec.license      = { :type => 'MIT' }
   spec.homepage     = 'https://asana.github.io/Drawsana'
   spec.documentation_url = 'https://asana.github.io/Drawsana'

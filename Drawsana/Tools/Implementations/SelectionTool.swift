@@ -13,6 +13,9 @@ public protocol SelectionToolDelegate: AnyObject {
   /// take this opportuny to activate a tool that can edit that shape, if one
   /// exists.
   func selectionToolDidTapOnAlreadySelectedShape(_ shape: ShapeSelectable)
+
+  func selectShape(_ shape: ShapeSelectable?)
+
 }
 
 public class SelectionTool: DrawingTool {
@@ -141,6 +144,10 @@ public class SelectionTool: DrawingTool {
   private func updateSelection(context: ToolOperationContext, _ newSelectedShape: ShapeSelectable?) {
     isUpdatingSelection = true
     context.toolSettings.selectedShape = newSelectedShape
+    if let delegate = delegate {
+      delegate.selectShape(newSelectedShape)
+    }
+
     isUpdatingSelection = false
   }
 }
