@@ -411,6 +411,12 @@ public class DrawsanaView: UIView {
     }
     reapplyLayerContents()
   }
+    
+    
+    public func didTapOnPage(_ point: CGPoint) -> Bool {
+        self.tool?.handleTap(context: self.toolOperationContext, point: point)
+        return false
+    }
 }
 
 // MARK: DrawsanaViewShapeUpdating implementation
