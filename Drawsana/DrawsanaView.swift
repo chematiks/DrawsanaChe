@@ -462,6 +462,11 @@ extension DrawsanaView: ToolSettingsDelegate {
     applySelectionViewState()
     // DrawingView's delegate might set this, so notify the tool if it happens
     tool?.apply(context: toolOperationContext, userSettings: userSettings)
+      (tool as? SelectionTool)?.delegate?.selectShape(selectedShape)
+      if selectedShape as? TextShape == nil && selectedShape != nil {
+          toolSettings.selectedShape = nil
+      }
+
   }
 
   func toolSettings(
